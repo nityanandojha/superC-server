@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cors = require("cors")
-const routesURL = require("./routes/routes")
+const routesURL = require("./routes/index")
 const usersModel = require("./models/users")
 const questionBankModel = require("./models/questionBankModel");
 const bettlesModel = require("./models/bettlesModel")
@@ -20,15 +20,15 @@ db.once('open', function(callback){
     console.log("connection succeeded");
 })
 
-app.use(express.json()) 
+app.use(express.json())
 app.use(cors({
     origin: "*",
     credentials: true
 }))
-//app.use("/signup", routesURL)
 
-app.post("/login", (req, res)=>{
-    //res.send(" hhhhhhhhhhhhhhhhh ")
+app.use('/', routesURL)
+
+/* app.post("/login", (req, res)=>{
     const {email, password} = req.body;
     usersModel.findOne({email:email}, (err, user) =>{
         if(user){
@@ -40,27 +40,6 @@ app.post("/login", (req, res)=>{
         }else{
             res.send("You are not registered")
         }
-    })
-})
-
-app.post("/registeruser", (req, res)=>{
-    //res.send(" === ")
-    const users = new usersModel({
-        name:req.body.name,
-        mobile:req.body.mobile,
-        email:req.body.email,
-        password:req.body.password,
-        childrens:req.body.childrens,
-        country:req.body.country,
-        subscription:req.body.subscription,
-        role:req.body.role
-    })
-
-    users.save().then(data=>{
-        res.json(data);
-    })
-    .catch(error=>{
-        res.json(error)
     })
 })
 
@@ -164,23 +143,15 @@ app.post("/fetchquestion", (req, res)=>{
             res.send("id mismatched")
         }
     })
-})
+}) */
 
-app.post("/allquestion", (req, res)=>{
+/* app.post("/allquestion", (req, res)=>{
     const {subject} = req.body;
     questionBankModel.find({subject:subject}, (err, ques) =>{
-        /* if(ques){
-            if(subject == ques.subject){
-                res.send({message:"", success:true, ques:ques})
-            }else{
-                res.send({message:"Incorrect ID"})
-            }
-        }else{
-            res.send("id mismatched")
-        } */
+        
         res.send({message:"", success:true, ques:ques})
     })
-})
+}) */
 
 
-app.listen(4000, ()=> console.log("server is up"))
+app.listen(process.env.PORT, ()=> console.log("server is up"))
