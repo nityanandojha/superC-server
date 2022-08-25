@@ -6,8 +6,7 @@ const balancesSchema = new mongoose.Schema({
     },
     money: {
 		type: Number,
-		required: true,
-		unique: true
+		required: true
 	},
     date:{
         type:Date,
