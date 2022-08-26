@@ -4,7 +4,7 @@ module.exports.balance = function(req, res){
     //const {mobile} = req.body;
 
     const balance = new balanceModel({
-        name:req.body.name,
+        name:req.body.shopname,
         money:req.body.money
     })
 
