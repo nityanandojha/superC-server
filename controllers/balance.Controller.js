@@ -1,8 +1,9 @@
-const usersModel = require("../models/balancesmodel")
+const balanceModel = require("../models/balancesmodel")
 
 module.exports.balance = function(req, res){
     //const {mobile} = req.body;
-    const balance = new usersModel({
+
+    const balance = new balanceModel({
         name:req.body.name,
         money:req.body.money
     })
@@ -14,4 +15,15 @@ module.exports.balance = function(req, res){
         res.json(error)
     })
     
+}
+
+module.exports.totalBalance = function(req, res){
+    balanceModel.find({}, (err, array)=>{
+        var total = 0;
+        array.forEach((item, index)=>{
+            total += item.money;
+        })
+        
+       res.send({message:"success", success:true, total:total});           
+    })
 }

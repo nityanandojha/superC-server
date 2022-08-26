@@ -5,6 +5,7 @@ const BalanceManagement = require("../controllers/balance.Controller")
 
 router.route('/signup').post(LoginManagement.signup);
 router.route('/balance').post(BalanceManagement.balance);
+router.route('/totalBalance').post(BalanceManagement.totalBalance);
 
 
 
