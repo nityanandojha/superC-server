@@ -18,7 +18,9 @@ module.exports.balance = function(req, res){
 }
 
 module.exports.totalBalance = function(req, res){
-    balanceModel.find({}, (err, array)=>{
+    let {shopename} = req.body;
+    console.log(shopename);
+    balanceModel.find({name:shopename}, 'money', (err, array)=>{
         var total = 0;
         array.forEach((item, index)=>{
             total += item.money;
