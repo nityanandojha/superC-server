@@ -26,6 +26,10 @@ module.exports.totalBalance = function(req, res){
             total += item.money;
         })
         
+        if(shopename == 'milk'){
+            total = total*65;
+        }
+        
        res.send({message:"success", success:true, total:total});           
     })
 }
